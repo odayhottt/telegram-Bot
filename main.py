@@ -1,9 +1,9 @@
-
+import os
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 
-BOT_TOKEN = "7121364426:AAGU7O3zr0BVNXc2eZV2wkmNaqy8RK_NBeY"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 SOURCE_CHANNEL_ID = -1002555988773
 TARGET_CHANNEL_IDS = [
     -1002491559178,
