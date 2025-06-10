@@ -36,19 +36,27 @@ async def forward_channel_post(message: Message):
 
     for target_id in TARGET_CHANNEL_IDS:
         try:
-            # لو نص عادي
+            # نص عادي
             if message.text:
                 await bot.send_message(chat_id=target_id, text=message.text)
-            
-            # لو صورة + كابتشن
+
+            # صورة مع كابتشن
             elif message.caption and message.photo:
                 await bot.send_photo(chat_id=target_id, photo=message.photo[-1].file_id, caption=message.caption)
             
-            # لو فيديو + كابتشن
+            # صورة بدون كابتشن
+            elif message.photo:
+                await bot.send_photo(chat_id=target_id, photo=message.photo[-1].file_id)
+
+            # فيديو مع كابتشن
             elif message.caption and message.video:
                 await bot.send_video(chat_id=target_id, video=message.video.file_id, caption=message.caption)
-            
-            # لو رسالة محوّلة
+
+            # فيديو بدون كابتشن
+            elif message.video:
+                await bot.send_video(chat_id=target_id, video=message.video.file_id)
+
+            # رسالة محوّلة
             elif message.forward_from or message.forward_from_chat:
                 if message.text:
                     await bot.send_message(chat_id=target_id, text=message.text)
